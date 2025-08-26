@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'hover-volume.css' %}">
+</head>
+<body>
+    <!-- Reels Modal -->
+    <div id="reelsModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: black;">
+        <div style="position: absolute; top: 20px; right: 20px; z-index: 10001;">
+            <span id="closeReels" style="color: white; font-size: 30px; cursor: pointer;">&times;</span>
+        </div>
+        <div id="reelsContainer" style="height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory;">
+            <!-- Videos will be loaded here -->
+        </div>
+    </div>
+    <header>
+        <nav>
+            <a href="/"><img src="{% static 'logo.png' %}" alt="Logo" class="logo"></a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="/#projects">Projects</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+            <div class="theme-switch" onclick="toggleTheme()" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; margin-left: 1rem;">Dark Mode</div>
+        </nav>
+    </header>
+    <main>
+        <section style="padding: 6rem 2rem 4rem 2rem; text-align: center;">
+            <h2>Video Projects</h2>
+            <p>Creative video content and motion graphics showcase</p>
+            <div class="video-pinterest-grid" style="margin-top: 2rem;">
+                {% for video in videos %}
+                <div class="video-pinterest-item" onclick="openReels({{ forloop.counter0 }})" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)" style="margin-bottom: 1rem;">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{{ video.video_file.url }}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                    <div class="video-title" style="padding: 0.5rem 0; color: var(--text-color); font-size: 0.9rem; font-weight: bold; line-height: 1.3; cursor: pointer;">
+                        {{ video.title }}
+                    </div>
+                </div>
+                {% empty %}
+                <div class="video-pinterest-item" onclick="openReels(0)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)" style="margin-bottom: 1rem;">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'vid/1475273_People_Family_1280x720.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                    <div class="video-title" style="padding: 0.5rem 0; color: var(--text-color); font-size: 0.9rem; font-weight: bold; line-height: 1.3; cursor: pointer;">
+                        People Family
+                    </div>
+                </div>
+                <div class="video-pinterest-item" onclick="openReels(1)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted>
+                        <source src="{% static 'vid/20435505-hd_1366_636_30fps (1).mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <h3>HD Video</h3>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                </div>
+                <div class="video-pinterest-item" onclick="openReels(2)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted>
+                        <source src="{% static 'vid/457528_Drone_Mountains_Drone_1280x720.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <h3>Drone Mountains</h3>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                </div>
+                <div class="video-pinterest-item" onclick="openReels(3)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted>
+                        <source src="{% static 'vid/595868_Drone_Landscape_Nature_1280x720.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <h3>Drone Landscape</h3>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                </div>
+                <div class="video-pinterest-item" onclick="openReels(4)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted>
+                        <source src="{% static 'vid/6010598_Woman_People_1280x720.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <h3>Woman People</h3>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                </div>
+                <div class="video-pinterest-item" onclick="openReels(5)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted>
+                        <source src="{% static 'vid/6010653_Woman_People_1280x720.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <h3>Woman Portrait</h3>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                </div>
+                <div class="video-pinterest-item" onclick="openReels(6)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted>
+                        <source src="{% static 'vid/6254390_Person_People_1280x720.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <h3>Person People</h3>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                </div>
+                <div class="video-pinterest-item" onclick="openReels(7)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted>
+                        <source src="{% static 'vid/6356447_Foggy_Mountain_Foogy_1280x720.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <h3>Foggy Mountain</h3>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                </div>
+                <div class="video-pinterest-item" onclick="openReels(8)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted>
+                        <source src="{% static 'vid/small-vecteezy_boudhanath-pagoda-in-kathmandu-nepal_2021513_small.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <h3>Boudhanath Pagoda</h3>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                </div>
+                <div class="video-pinterest-item" onclick="openReels(9)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted>
+                        <source src="{% static 'vid/small-vecteezy_drone-flight-over-majestic-snow-capped-mountains-peeking_57059038_small.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <h3>Mountain Flight</h3>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Subash Gongwa. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Pass video data from Django to JavaScript
+        const videos = [
+            {% for video in videos %}
+            { src: '{{ video.video_file.url }}', title: '{{ video.title }}' }{% if not forloop.last %},{% endif %}
+            {% empty %}
+            { src: '/static/vid/1475273_People_Family_1280x720.mp4', title: 'People Family' },
+            { src: '/static/vid/20435505-hd_1366_636_30fps (1).mp4', title: 'HD Video' },
+            { src: '/static/vid/457528_Drone_Mountains_Drone_1280x720.mp4', title: 'Drone Mountains' }
+            {% endfor %}
+        ];
+    </script>
+    <script src="{% static 'reels.js' %}"></script>
+    <script src="{% static 'theme-toggle.js' %}"></script>
+</body>
+</html>

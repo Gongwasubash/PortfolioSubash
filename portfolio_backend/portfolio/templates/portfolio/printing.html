@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print & Packaging - Portfolio</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <!-- Image Preview Modal -->
+    <div id="imageModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9);">
+        <span id="closeBtn" style="position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10000;">&times;</span>
+        <span id="prevBtn" style="position: absolute; top: 50%; left: 20px; color: #f1f1f1; font-size: 30px; font-weight: bold; cursor: pointer; z-index: 10000; transform: translateY(-50%);">&#10094;</span>
+        <span id="nextBtn" style="position: absolute; top: 50%; right: 20px; color: #f1f1f1; font-size: 30px; font-weight: bold; cursor: pointer; z-index: 10000; transform: translateY(-50%);">&#10095;</span>
+        <img id="modalImage" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 90%; max-height: 90%; object-fit: contain;">
+    </div>
+    <header>
+        <nav>
+            <a href="/"><img src="{% static 'logo.png' %}" alt="Logo" class="logo"></a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="/#projects">Projects</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+            <div class="theme-switch" onclick="toggleTheme()" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; margin-left: 1rem;">Dark Mode</div>
+        </nav>
+    </header>
+    <main>
+        <section style="padding: 8rem 2rem 4rem 2rem; text-align: center;">
+            <h2>Print & Packaging Design</h2>
+            <p>Professional print designs and packaging solutions</p>
+            <div class="pinterest-grid" style="margin-top: 2rem;">
+                {% for design in print_designs %}
+                <div class="pinterest-item" onclick="openModal('{{ design.image.url }}')">
+                    <img src="{{ design.image.url }}" alt="{{ design.title }}">
+                    <div class="pinterest-overlay">
+                        <h3>{{ design.title }}</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{{ design.image.url }}', '{{ design.title }}.jpg')">Download</button>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/print/2 Daily (2 x 8 oz).jpg' %}')">
+                    <img src="{% static 'pictures/print/2 Daily (2 x 8 oz).jpg' %}" alt="Daily Package">
+                    <div class="pinterest-overlay">
+                        <h3>Daily Package Design</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/print/2 Daily (2 x 8 oz).jpg' %}', 'Daily-Package.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/print/Astano-Chopping Board A- medium copy.jpg' %}')">
+                    <img src="{% static 'pictures/print/Astano-Chopping Board A- medium copy.jpg' %}" alt="Chopping Board">
+                    <div class="pinterest-overlay">
+                        <h3>Astano Chopping Board</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/print/Astano-Chopping Board A- medium copy.jpg' %}', 'Astano-Chopping-Board.jpg')">Download</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Subash Gongwa. All rights reserved.</p>
+    </footer>
+    
+    <script src="{% static 'download.js' %}"></script>
+    <script src="{% static 'preview.js' %}"></script>
+    <script src="{% static 'theme-toggle.js' %}"></script>
+</body>
+</html>

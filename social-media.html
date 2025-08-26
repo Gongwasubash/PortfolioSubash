@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="download.js"></script>
+    <script src="preview.js"></script>
+    <script src="theme-toggle.js"></script>
+    
+    <!-- Image Preview Modal -->
+    <div id="imageModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9);">
+        <span id="closeBtn" style="position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 10000;">&times;</span>
+        <span id="prevBtn" style="position: absolute; top: 50%; left: 20px; color: #f1f1f1; font-size: 30px; font-weight: bold; cursor: pointer; z-index: 10000; transform: translateY(-50%);">&#10094;</span>
+        <span id="nextBtn" style="position: absolute; top: 50%; right: 20px; color: #f1f1f1; font-size: 30px; font-weight: bold; cursor: pointer; z-index: 10000; transform: translateY(-50%);">&#10095;</span>
+        <img id="modalImage" style="margin: auto; display: block; width: 80%; max-width: 700px; margin-top: 5%;">
+    </div>
+    <header>
+        <nav>
+            <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="theme-switch" onclick="toggleTheme()" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; margin-left: 1rem;">Dark Mode</div>
+        </nav>
+    </header>
+    <main>
+        <section style="padding: 8rem 2rem 4rem 2rem; text-align: center;">
+            <h2>Social Media Posts</h2>
+            <p>Engaging social media designs and promotional content</p>
+            <div class="pinterest-grid" style="margin-top: 2rem;">
+                <div class="pinterest-item" onclick="openModal('pictures/post/CG.jpg')">
+                    <img src="pictures/post/CG.jpg" alt="CG Design">
+                    <div class="pinterest-overlay">
+                        <h3>CG Design</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/CG.jpg', 'CG-Design.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/cg 2.jpg')">
+                    <img src="pictures/post/cg 2.jpg" alt="CG Design 2">
+                    <div class="pinterest-overlay">
+                        <h3>CG Design 2</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/cg 2.jpg', 'CG-Design-2.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/CHOCOFUN 1.jpg')">
+                    <img src="pictures/post/CHOCOFUN 1.jpg" alt="Chocofun 1">
+                    <div class="pinterest-overlay">
+                        <h3>Chocofun Campaign</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/CHOCOFUN 1.jpg', 'Chocofun-1.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/CHOCOFUN 2.jpg')">
+                    <img src="pictures/post/CHOCOFUN 2.jpg" alt="Chocofun 2">
+                    <div class="pinterest-overlay">
+                        <h3>Chocofun Series</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/CHOCOFUN 2.jpg', 'Chocofun-2.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/ghode jatra pathao.jpg')">
+                    <img src="pictures/post/ghode jatra pathao.jpg" alt="Ghode Jatra">
+                    <div class="pinterest-overlay">
+                        <h3>Ghode Jatra Pathao</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/ghode jatra pathao.jpg', 'Ghode-Jatra-Pathao.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/IMG-20250306-WA0000.jpg')">
+                    <img src="pictures/post/IMG-20250306-WA0000.jpg" alt="Social Post">
+                    <div class="pinterest-overlay">
+                        <h3>Social Media Post</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/IMG-20250306-WA0000.jpg', 'Social-Media-Post.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/janai purnima.jpg')">
+                    <img src="pictures/post/janai purnima.jpg" alt="Janai Purnima">
+                    <div class="pinterest-overlay">
+                        <h3>Janai Purnima</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/janai purnima.jpg', 'Janai-Purnima.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/ktm.jpg')">
+                    <img src="pictures/post/ktm.jpg" alt="KTM Design">
+                    <div class="pinterest-overlay">
+                        <h3>KTM Post</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/ktm.jpg', 'KTM-Post.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/ktm2.jpg')">
+                    <img src="pictures/post/ktm2.jpg" alt="KTM Design 2">
+                    <div class="pinterest-overlay">
+                        <h3>KTM Campaign</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/ktm2.jpg', 'KTM-Campaign.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/laxmi puja ko subhakamana.jpg')">
+                    <img src="pictures/post/laxmi puja ko subhakamana.jpg" alt="Laxmi Puja">
+                    <div class="pinterest-overlay">
+                        <h3>Laxmi Puja Ko Subhakamana</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/laxmi puja ko subhakamana.jpg', 'Laxmi-Puja-Ko-Subhakamana.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/mahashivaratri.png')">
+                    <img src="pictures/post/mahashivaratri.png" alt="Mahashivaratri">
+                    <div class="pinterest-overlay">
+                        <h3>Mahashivaratri</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/mahashivaratri.png', 'Mahashivaratri.png')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/social media.jpg')">
+                    <img src="pictures/post/social media.jpg" alt="Social Media">
+                    <div class="pinterest-overlay">
+                        <h3>Social Media Design</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/social media.jpg', 'Social-Media-Design.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/teej ko subhakamana.jpg')">
+                    <img src="pictures/post/teej ko subhakamana.jpg" alt="Teej">
+                    <div class="pinterest-overlay">
+                        <h3>Teej Ko Subhakamana</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/teej ko subhakamana.jpg', 'Teej-Ko-Subhakamana.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/thakali.jpg')">
+                    <img src="pictures/post/thakali.jpg" alt="Thakali Design">
+                    <div class="pinterest-overlay">
+                        <h3>Thakali Restaurant</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/thakali.jpg', 'Thakali-Restaurant.jpg')">Download</button>
+                    </div>
+                </div>
+                <div class="pinterest-item" onclick="openModal('pictures/post/thakali 1.jpg')">
+                    <img src="pictures/post/thakali 1.jpg" alt="Thakali Design 2">
+                    <div class="pinterest-overlay">
+                        <h3>Thakali Special</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('pictures/post/thakali 1.jpg', 'Thakali-Special.jpg')">Download</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Subash Gongwa. All rights reserved.</p>
+    </footer>
+</body>
+</html>

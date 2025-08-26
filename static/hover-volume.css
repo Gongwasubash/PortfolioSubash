@@ -1,0 +1,8 @@
+.video-pinterest-item .volume-btn {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.video-pinterest-item:hover .volume-btn {
+    opacity: 1;
+}
