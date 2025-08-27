@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/videos/', views.videos_api, name='videos_api'),
     path('api/contact/', views.contact_api, name='contact_api'),
     path('api/social-media/', views.social_media_api, name='social_media_api'),
+    path('send-email/', views.send_email, name='send_email'),
 ]

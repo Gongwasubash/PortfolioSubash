@@ -89,6 +89,38 @@ Submitted at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
     
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
+@csrf_exempt
+def send_email(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            
+            subject = f"Portfolio Contact: {data['subject']}"
+            message = f"""
+New message from your portfolio:
+
+Name: {data['name']}
+Email: {data['email']}
+Subject: {data['subject']}
+Message:
+{data['message']}
+            """
+            
+            send_mail(
+                subject,
+                message,
+                data['email'],
+                ['subashgongwanepal@gmail.com'],
+                fail_silently=False,
+            )
+            
+            return JsonResponse({'success': True})
+            
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    return JsonResponse({'error': 'Invalid method'}, status=405)
+
 def social_media_api(request):
     designs = SocialMediaDesign.objects.all().values()
     return JsonResponse(list(designs), safe=False)

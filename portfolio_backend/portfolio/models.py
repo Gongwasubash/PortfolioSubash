@@ -14,22 +14,22 @@ class Video(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    message = models.TextField()
+    name = models.CharField(max_length=100, default='')
+    email = models.EmailField(default='')
+    phone = models.CharField(max_length=20, default='', blank=True)
+    message = models.TextField(default='')
     created_at = models.DateTimeField(auto_now_add=True)
 
 class SocialMediaDesign(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(upload_to='social_media/')
-    platform = models.CharField(max_length=50)  # Instagram, Facebook, etc.
+    title = models.CharField(max_length=200, default='')
+    description = models.TextField(default='')
+    image = models.ImageField(upload_to='social_media/', blank=True, null=True)
+    platform = models.CharField(max_length=50, default='')  # Instagram, Facebook, etc.
     created_at = models.DateTimeField(auto_now_add=True)
 
 class PrintDesign(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(upload_to='print_designs/')
-    category = models.CharField(max_length=50)  # Packaging, Label, Brochure, etc.
+    title = models.CharField(max_length=200, default='')
+    description = models.TextField(default='')
+    image = models.ImageField(upload_to='print_designs/', blank=True, null=True)
+    category = models.CharField(max_length=50, default='')  # Packaging, Label, Brochure, etc.
     created_at = models.DateTimeField(auto_now_add=True)

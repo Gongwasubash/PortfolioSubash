@@ -61,8 +61,60 @@
         </section>
     </main>
     
-    <footer>
-        <p>&copy; 2024 Subash Gongwa. All rights reserved.</p>
+    <footer style="background: #000000; color: white; padding: 3rem 2rem 2rem; margin-top: 4rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 2rem; text-align: center;">
+                <div class="footer-contact-item">
+                    <a href="mailto:subashgongwanepal@gmail.com" style="color: white; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <span style="font-weight: 600; font-size: 1.2rem;">Email</span>
+                        <span style="font-size: 0.9rem; opacity: 0.8;">subashgongwanepal@gmail.com</span>
+                    </a>
+                </div>
+                <div class="footer-contact-item">
+                    <a href="https://wa.me/9779840564096" target="_blank" style="color: white; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <span style="font-weight: 600; font-size: 1.2rem;">WhatsApp</span>
+                        <span style="font-size: 0.9rem; opacity: 0.8;">+977 984-0564096</span>
+                    </a>
+                </div>
+                <div class="footer-contact-item">
+                    <a href="https://np.linkedin.com/in/subash-gongwa-165153351" target="_blank" style="color: white; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <span style="font-weight: 600; font-size: 1.2rem;">LinkedIn</span>
+                        <span style="font-size: 0.9rem; opacity: 0.8;">Connect with me</span>
+                    </a>
+                </div>
+                <div class="footer-contact-item">
+                    <div style="color: white; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                        <span style="font-weight: 600; font-size: 1.2rem;">Resume</span>
+                        <div style="display: flex; gap: 1rem; font-size: 0.9rem;">
+                            <a href="{% static 'subash gongwa (1) (1) (1).pdf' %}" target="_blank" style="color: #ffd700; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffed4e'" onmouseout="this.style.color='#ffd700'">Preview</a>
+                            <a href="{% static 'subash gongwa (1) (1) (1).pdf' %}" download="Subash_Gongwa_CV.pdf" style="color: #4ade80; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#6ee7b7'" onmouseout="this.style.color='#4ade80'">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 1px; background: rgba(255, 255, 255, 0.2); margin: 2rem 0;"></div>
+            <div style="text-align: center;">
+                <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">&copy; 2024 Subash Gongwa. All rights reserved.</p>
+                <p style="margin: 0.5rem 0 0; font-size: 0.8rem; opacity: 0.6;">Graphics Designer | Video Editor | Motion Designer</p>
+            </div>
+        </div>
+        <style>
+            @media (max-width: 768px) {
+                footer > div > div:first-child {
+                    grid-template-columns: repeat(2, 1fr) !important;
+                    gap: 1.5rem !important;
+                }
+            }
+            @media (max-width: 480px) {
+                footer {
+                    padding: 2rem 1rem 1.5rem !important;
+                }
+                footer > div > div:first-child {
+                    grid-template-columns: 1fr !important;
+                    gap: 1rem !important;
+                }
+            }
+        </style>
     </footer>
     
     <script src="{% static 'download.js' %}"></script>

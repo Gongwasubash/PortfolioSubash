@@ -36,9 +36,15 @@ class VideoAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'phone', 'created_at']
-    readonly_fields = ['created_at']
+    list_display = ['name', 'email', 'phone', 'message', 'created_at']
+    readonly_fields = ['name', 'email', 'phone', 'message', 'created_at']
     list_filter = ['created_at']
+    
+    def has_add_permission(self, request):
+        return False
+    
+    def has_change_permission(self, request, obj=None):
+        return False
 
 @admin.register(SocialMediaDesign)
 class SocialMediaDesignAdmin(admin.ModelAdmin):
