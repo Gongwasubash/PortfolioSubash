@@ -7,10 +7,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "your_secret_key_here"
 
 # Debug
-DEBUG = False
+DEBUG = True
 
 # Allowed Hosts
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "portfoliosubash-6.onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
