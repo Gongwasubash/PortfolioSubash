@@ -10,6 +10,33 @@
 
 </head>
 <body>
+    <!-- Loader -->
+    <div id="loader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; display: flex; justify-content: center; align-items: center; z-index: 9999;">
+        <div style="width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+    </div>
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-30px) translateX(20px); }
+            66% { transform: translateY(20px) translateX(-15px); }
+        }
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-40px) translateX(-25px); }
+        }
+        @keyframes float3 {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(15px) translateX(30px); }
+            75% { transform: translateY(-25px) translateX(-20px); }
+        }
+        body.dark-mode #loader {
+            background: #1a1a2e !important;
+        }
+    </style>
     <header>
         <nav>
             <a href="/"><img src="{% static 'logo.png' %}" alt="Logo" class="logo"></a>
@@ -30,7 +57,13 @@
     </header>
     
     <main>
-        <section id="hero" class="hero-section">
+        <section id="hero" class="hero-section" style="position: relative; overflow: hidden;">
+            <!-- Moving Background Animation -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                <div style="position: absolute; width: 200px; height: 200px; background: linear-gradient(45deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1)); border-radius: 50%; animation: float1 6s ease-in-out infinite;"></div>
+                <div style="position: absolute; width: 150px; height: 150px; background: linear-gradient(45deg, rgba(231, 76, 60, 0.1), rgba(230, 126, 34, 0.1)); border-radius: 50%; animation: float2 8s ease-in-out infinite; top: 60%; right: 10%;"></div>
+                <div style="position: absolute; width: 100px; height: 100px; background: linear-gradient(45deg, rgba(46, 204, 113, 0.1), rgba(26, 188, 156, 0.1)); border-radius: 50%; animation: float3 10s ease-in-out infinite; bottom: 20%; left: 20%;"></div>
+            </div>
             <div class="hero-grid">
                 <div class="hero-content">
                     <div class="hero-subtitle">Graphic Design</div>
@@ -74,8 +107,8 @@
             </div>
         </section>
 
-        <section id="contact" style="padding: 4rem 2rem;">
-            <div style="max-width: 1200px; margin: 0 auto;">
+        <section id="contact" style="padding: 4rem 2rem; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+            <div style="max-width: 1200px; width: 100%; text-align: center;">
                 <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #2c3e50;">Get In Touch</h2>
                 
                 <!-- Contact Form - Full Width -->
@@ -102,7 +135,7 @@
                     <div class="contact-glass-item" style="text-align: center; padding: 2rem 1.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 16px; transition: all 0.3s ease; cursor: pointer; box-shadow: 0 8px 32px rgba(0,0,0,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 48px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(0,0,0,0.1)'">
                         <a href="https://wa.me/9779840564096" target="_blank" style="text-decoration: none; color: inherit; display: block;">
                             <div style="margin-bottom: 1rem;">
-                                <img src="{% static 'ICON/whatsapp.png' %}" alt="WhatsApp" style="width: 48px; height: 48px; filter: hue-rotate(120deg) saturate(1.5) brightness(1.1);">
+                                <img src="{% static 'ICON/whatsapp.png' %}" alt="WhatsApp" style="width: 48px; height: 48px; filter: hue-rotate(90deg) saturate(2) brightness(1.2);">
                             </div>
                             <h3 class="contact-title" style="margin: 0.5rem 0; font-size: 1.1rem; color: #2c3e50;">WhatsApp</h3>
                         </a>
@@ -219,7 +252,7 @@
                     @media (max-width: 480px) {
                         .hero-section {
                             padding: 0.5rem 0.25rem !important;
-                            min-height: 40vh !important;
+                            min-height: 25vh !important;
                             margin: 0 !important;
                         }
                         
@@ -285,7 +318,7 @@
             
             <!-- Copyright Section -->
             <div style="text-align: center;">
-                <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">&copy; 2024 Subash Gongwa. All rights reserved.</p>
+                <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">&copy; 2025 Subash Gongwa. All rights reserved.</p>
                 <p style="margin: 0.5rem 0 0; font-size: 0.8rem; opacity: 0.6;">Graphics Designer | Video Editor | Motion Designer</p>
             </div>
         </div>
@@ -330,6 +363,13 @@
     <script src="{% static 'card-stack.js' %}"></script>
     <script src="{% static 'theme-toggle.js' %}"></script>
     <script src="{% static 'contact-form.js' %}"></script>
+    
+    <!-- Loader Script -->
+    <script>
+        window.addEventListener('load', function() {
+            document.getElementById('loader').style.display = 'none';
+        });
+    </script>
     
     <!-- Simple Chat Widget -->
     <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">

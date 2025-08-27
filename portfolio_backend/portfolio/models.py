@@ -33,3 +33,17 @@ class PrintDesign(models.Model):
     image = models.ImageField(upload_to='print_designs/', blank=True, null=True)
     category = models.CharField(max_length=50, default='')  # Packaging, Label, Brochure, etc.
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Order(models.Model):
+    service_name = models.CharField(max_length=100)
+    price = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    project_details = models.TextField()
+    payment_status = models.CharField(max_length=20, default='pending')
+    khalti_token = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.service_name} - {self.name}"

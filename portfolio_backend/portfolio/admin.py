@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Video, Contact, SocialMediaDesign, PrintDesign
+from .models import Project, Video, Contact, SocialMediaDesign, PrintDesign, Order
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -87,3 +87,16 @@ class PrintDesignAdmin(admin.ModelAdmin):
         queryset.delete()
         self.message_user(request, f'{count} print designs deleted successfully.')
     delete_selected.short_description = 'Delete selected print designs'
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['service_name', 'name', 'email', 'phone', 'price', 'payment_status', 'created_at']
+    readonly_fields = ['service_name', 'name', 'email', 'phone', 'price', 'project_details', 'payment_status', 'khalti_token', 'created_at']
+    list_filter = ['service_name', 'payment_status', 'created_at']
+    search_fields = ['name', 'email', 'service_name']
+    
+    def has_add_permission(self, request):
+        return False
+    
+    def has_change_permission(self, request, obj=None):
+        return False

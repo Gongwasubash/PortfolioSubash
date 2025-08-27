@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import Project, Video, Contact, SocialMediaDesign, PrintDesign
+from .models import Project, Video, Contact, SocialMediaDesign, PrintDesign, Order
 import json
 from datetime import datetime
 
@@ -124,3 +124,27 @@ Message:
 def social_media_api(request):
     designs = SocialMediaDesign.objects.all().values()
     return JsonResponse(list(designs), safe=False)
+
+@csrf_exempt
+def create_order(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            
+            order = Order.objects.create(
+                service_name=data['service_name'],
+                price=data['price'],
+                name=data['name'],
+                email=data['email'],
+                phone=data['phone'],
+                project_details=data['project_details'],
+                payment_status=data.get('payment_status', 'pending'),
+                khalti_token=data.get('khalti_token', '')
+            )
+            
+            return JsonResponse({'status': 'success', 'order_id': order.id})
+            
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})

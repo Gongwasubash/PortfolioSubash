@@ -83,12 +83,13 @@
             <h3 id="serviceTitle" style="margin-bottom: 1rem;">Order Service</h3>
             <p id="servicePrice" style="margin-bottom: 1rem; font-weight: bold;"></p>
             <img src="{% static 'pictures/qr.jpg' %}" alt="QR Code" style="width: 250px; height: 250px; margin: 0 auto 1rem auto; display: block; border-radius: 10px;">
-            <form>
-                <input type="text" placeholder="Your Name" style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
-                <input type="email" placeholder="Your Email" style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
-                <input type="tel" placeholder="Your Phone" style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
-                <textarea placeholder="Project Details" style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px; height: 80px; resize: vertical;"></textarea>
-                <button type="submit" style="width: 100%; padding: 0.8rem; background: black; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit Order</button>
+            <form id="orderForm">
+                <input type="text" id="orderName" placeholder="Your Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="email" id="orderEmail" placeholder="Your Email" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="tel" id="orderPhone" placeholder="Your Phone" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                <textarea id="orderDetails" placeholder="Project Details" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px; height: 80px; resize: vertical;"></textarea>
+                <button type="button" id="payment-button" style="width: 100%; padding: 0.8rem; background: #5C2D91; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 0.5rem;">Pay with Khalti</button>
+                <button type="submit" style="width: 100%; padding: 0.8rem; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Order Without Payment</button>
             </form>
         </div>
     </div>
@@ -126,7 +127,7 @@
             </div>
             <div style="height: 1px; background: rgba(255, 255, 255, 0.2); margin: 2rem 0;"></div>
             <div style="text-align: center;">
-                <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">&copy; 2024 Subash Gongwa. All rights reserved.</p>
+                <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">&copy; 2025 Subash Gongwa. All rights reserved.</p>
                 <p style="margin: 0.5rem 0 0; font-size: 0.8rem; opacity: 0.6;">Graphics Designer | Video Editor | Motion Designer</p>
             </div>
         </div>
@@ -149,7 +150,9 @@
         </style>
     </footer>
     
+    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
     <script src="{% static 'order-modal.js' %}"></script>
+    <script src="{% static 'order-form.js' %}"></script>
     <script src="{% static 'theme-toggle.js' %}"></script>
 </body>
 </html>
