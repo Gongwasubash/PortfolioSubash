@@ -1,11 +1,10 @@
-Django
+Django>=5.2.1
 gunicorn
-uvicorn[standard]
 whitenoise[brotli]
 dj-database-url
 psycopg2-binary
-python-dotenv
+python-decouple
 
-# Fixed dependencies
+# Fixed dependencies (Render compatibility)
 h11<0.15,>=0.13
 pillow<11.0,>=9.2.0
