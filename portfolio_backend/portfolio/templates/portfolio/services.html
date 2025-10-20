@@ -6,69 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Portfolio</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'theme.css' %}">
 </head>
 <body>
     <header>
         <nav>
             <a href="/"><img src="{% static 'logo.png' %}" alt="Logo" class="logo"></a>
-            <ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
                 <li><a href="/">Home</a></li>
                 <li><a href="/#about">About</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="/#projects">Projects</a></li>
                 <li><a href="/#contact">Contact</a></li>
             </ul>
-            <div class="theme-switch" onclick="toggleTheme()" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; margin-left: 1rem;">Dark Mode</div>
+            <div class="theme-toggle" onclick="toggleTheme()"></div>
+
         </nav>
     </header>
     
     <main>
-        <section id="services" style="padding: 8rem 2rem 4rem 2rem; text-align: center;">
+        <section id="services" style="padding: 8rem 2rem 4rem 2rem; text-align: center; color: var(--text-color);">
             <h2>My Services</h2>
             <p>Professional design services tailored to your needs</p>
             
-            <div class="project-grid">
-                <div class="project">
-                    <img src="{% static 'pictures/vid.jpg' %}" alt="Video Production">
-                    <h3>Video Production</h3>
-                    <p>Professional video editing, motion graphics, and animated content for social media, commercials, and promotional materials.</p>
-                    <ul style="text-align: left; margin: 1rem 0;">
-                        <li>Motion Graphics</li>
-                        <li>Video Editing</li>
-                        <li>Animation</li>
-                        <li>Commercial Videos</li>
-                    </ul>
-                    <div onclick="openOrderModal('Video Production', 'Rs. 2000')" style="font-size: 1.2rem; font-weight: bold; color: white; margin-top: 1rem; background: black; padding: 0.5rem 1rem; border-radius: 25px; display: inline-block; cursor: pointer;">Starting at Rs. 2000</div>
-                </div>
-
-                <div class="project">
-                    <img src="{% static 'pictures/design.jpg' %}" alt="Social Media Design">
-                    <h3>Social Media Design</h3>
-                    <p>Eye-catching social media posts, stories, and promotional content designed to engage your audience and boost your brand.</p>
-                    <ul style="text-align: left; margin: 1rem 0;">
-                        <li>Instagram Posts</li>
-                        <li>Facebook Graphics</li>
-                        <li>Story Templates</li>
-                        <li>Brand Campaigns</li>
-                    </ul>
-                    <div onclick="openOrderModal('Social Media Design', 'Rs. 1000')" style="font-size: 1.2rem; font-weight: bold; color: white; margin-top: 1rem; background: black; padding: 0.5rem 1rem; border-radius: 25px; display: inline-block; cursor: pointer;">Starting at Rs. 1000</div>
-                </div>
-
-                <div class="project">
-                    <img src="{% static 'pictures/101278.jpg' %}" alt="Graphic Design">
-                    <h3>Graphic Design</h3>
-                    <p>Complete graphic design solutions including logos, branding, print materials, and digital artwork for your business needs.</p>
-                    <ul style="text-align: left; margin: 1rem 0;">
-                        <li>Logo Design</li>
-                        <li>Brand Identity</li>
-                        <li>Print Design</li>
-                        <li>Digital Artwork</li>
-                    </ul>
-                    <div onclick="openOrderModal('Graphic Design', 'Rs. 3000')" style="font-size: 1.2rem; font-weight: bold; color: white; margin-top: 1rem; background: black; padding: 0.5rem 1rem; border-radius: 25px; display: inline-block; cursor: pointer;">Starting at Rs. 3000</div>
-                </div>
+            <div class="project-grid" id="services-container">
+                <!-- Services will be loaded here -->
             </div>
+            
+            <script>
+                const services = [
+                    {name: 'Logo Design', price: '1,500', deliveryTime: '2–3 days', description: 'Custom logo with 2 free revisions', status: 'Available', photo: 'Logo Design.jpg'},
+                    {name: 'Business Card Design', price: '500', deliveryTime: '1 day', description: 'Double-sided, print-ready design', status: 'Available', photo: 'Business Card Design.jpg'},
+                    {name: 'ID Card Design', price: '300', deliveryTime: '1 day', description: 'School or office ID layout', status: 'Available', photo: 'ID Card Design.jpg'},
+                    {name: 'Lanyard Design', price: '400', deliveryTime: '1 day', description: 'Professional lanyard design', status: 'Available', photo: 'Lanyard Design.jpg'},
+                    {name: 'Banner Design', price: '700', deliveryTime: '1–2 days', description: 'Promotional or event banners', status: 'Available', photo: 'Banner Design.jpg'},
+                    {name: 'Sticker or Label Design', price: '300', deliveryTime: '1 day', description: 'Product or packaging stickers', status: 'Available', photo: 'Sticker or Label Design.jpg'},
+                    {name: 'Menu Card Design', price: '800', deliveryTime: '2 days', description: 'Café or restaurant menu layout', status: 'Available', photo: 'Menu Card Design.jpg'},
+                    {name: 'Poster Design', price: '600', deliveryTime: '1 day', description: 'Event or marketing posters', status: 'Available', photo: 'Poster Design.jpg'},
+                    {name: 'Social Media Post', price: '300', deliveryTime: 'Same day', description: 'Facebook / Instagram post design', status: 'Available', photo: 'Social Media Post.jpg'},
+                    {name: 'Certificate / Medal Design', price: '500', deliveryTime: '1 day', description: 'Award or achievement design', status: 'Available', photo: 'Certificate  Medal Design.jpg'},
+                    {name: 'Invitation Card', price: '400', deliveryTime: '1–2 days', description: 'Wedding or event invitation', status: 'Available', photo: 'Invitation Card.jpg'}
+                ];
+                
+                function loadServices() {
+                    const container = document.getElementById('services-container');
+                    services.forEach(service => {
+                        container.innerHTML += `
+                            <div class="project" style="background: #000000; border-radius: 25px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 2px solid transparent; background-clip: padding-box; position: relative;" onmouseover="this.style.transform='translateY(-15px) scale(1.02)'; this.style.boxShadow='0 25px 50px rgba(102, 126, 234, 0.15), 0 10px 25px rgba(0,0,0,0.1)'; this.style.borderColor='rgba(102, 126, 234, 0.2)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='var(--shadow)'; this.style.borderColor='transparent';">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%); border-radius: 25px 25px 0 0;"></div>
+                                <div style="position: relative; overflow: hidden;">
+                                    <img src="/static/pictures/${service.photo}" alt="${service.name}" style="width: 100%; height: 240px; object-fit: cover; transition: all 0.4s ease; filter: brightness(1.05) contrast(1.1);" onmouseover="this.style.transform='scale(1.08)'; this.style.filter='brightness(1.1) contrast(1.15)';" onmouseout="this.style.transform='scale(1)'; this.style.filter='brightness(1.05) contrast(1.1)';">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); opacity: 0; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'"></div>
+                                    <div style="position: absolute; top: 20px; right: 20px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 0.4rem 1rem; border-radius: 25px; font-size: 0.8rem; font-weight: 700; backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); text-transform: uppercase; letter-spacing: 0.5px;">${service.status}</div>
+                                </div>
+                                <div class="project-content" style="padding: 2rem 1.8rem;">
+                                    <h3 style="margin: 0 0 1rem 0; color: var(--text-color); font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${service.name}</h3>
+                                    <p style="color: var(--text-secondary); line-height: 1.6; margin: 0 0 1.5rem 0; font-size: 0.95rem; font-weight: 400;">${service.description}</p>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin: 1.5rem 0; padding: 1rem 1.2rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%); border-radius: 15px; border: 1px solid var(--border-color);">
+                                        <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+                                            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Delivery Time</span>
+                                            <span style="font-size: 1rem; color: #667eea; font-weight: 700;">${service.deliveryTime}</span>
+                                        </div>
+                                        <div style="text-align: right;">
+                                            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem;">Starting at</div>
+                                            <div style="font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Rs.${service.price}</div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center; margin-top: 2rem;">
+                                        <div onclick="openOrderModal('${service.name}', 'Rs. ${service.price}')" style="width: 100%; font-size: 1.1rem; font-weight: 700; color: white; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.2rem 2rem; border-radius: 50px; display: inline-block; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3); position: relative; overflow: hidden; text-transform: uppercase; letter-spacing: 1px;" onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 15px 35px rgba(102, 126, 234, 0.4)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.3)';">Order Now</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                // Services will be loaded after theme initialization
+                
+                // Load services on page load
+                document.addEventListener('DOMContentLoaded', function() {
+                    loadServices();
+                });
+                
 
-            <div class="cta-section" style="margin-top: 4rem; padding: 2rem; background: rgba(255, 255, 255, 0.05); border-radius: 15px; backdrop-filter: blur(10px);">
+            </script>
+
+            <div class="cta-section" style="margin-top: 4rem; padding: 2rem; background: var(--card-bg); border-radius: 15px; backdrop-filter: blur(10px); color: var(--text-color); border: 1px solid var(--border-color);">
                 <h3>Ready to Start Your Project?</h3>
                 <p>Let's discuss your design needs and bring your vision to life</p>
                 <a href="/#contact" style="display: inline-block; background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; margin-top: 1rem; transition: transform 0.3s ease;">Get In Touch</a>
@@ -84,39 +112,39 @@
             <p id="servicePrice" style="margin-bottom: 1rem; font-weight: bold;"></p>
             <img src="{% static 'pictures/qr.jpg' %}" alt="QR Code" style="width: 250px; height: 250px; margin: 0 auto 1rem auto; display: block; border-radius: 10px;">
             <form id="orderForm">
-                <input type="text" id="orderName" placeholder="Your Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
-                <input type="email" id="orderEmail" placeholder="Your Email" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
-                <input type="tel" id="orderPhone" placeholder="Your Phone" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
-                <textarea id="orderDetails" placeholder="Project Details" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px; height: 80px; resize: vertical;"></textarea>
+                <input type="text" id="orderName" placeholder="Your Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px; background: white; color: black;">
+                <input type="email" id="orderEmail" placeholder="Your Email" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px; background: white; color: black;">
+                <input type="tel" id="orderPhone" placeholder="Your Phone" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px; background: white; color: black;">
+                <textarea id="orderDetails" placeholder="Project Details" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px; height: 80px; resize: vertical; background: white; color: black;"></textarea>
                 <button type="button" id="payment-button" style="width: 100%; padding: 0.8rem; background: #5C2D91; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 0.5rem;">Pay with Khalti</button>
                 <button type="submit" style="width: 100%; padding: 0.8rem; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Order Without Payment</button>
             </form>
         </div>
     </div>
     
-    <footer style="background: #000000; color: white; padding: 3rem 2rem 2rem; margin-top: 4rem;">
+    <footer style="background: var(--footer-bg); color: var(--text-color); padding: 3rem 2rem 2rem; margin-top: 4rem; border-top: 1px solid var(--border-color);">
         <div style="max-width: 1200px; margin: 0 auto;">
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 2rem; text-align: center;">
                 <div class="footer-contact-item">
-                    <a href="mailto:subashgongwanepal@gmail.com" style="color: white; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <a href="mailto:subashgongwanepal@gmail.com" style="color: var(--text-color); text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <span style="font-weight: 600; font-size: 1.2rem;">Email</span>
                         <span style="font-size: 0.9rem; opacity: 0.8;">subashgongwanepal@gmail.com</span>
                     </a>
                 </div>
                 <div class="footer-contact-item">
-                    <a href="https://wa.me/9779840564096" target="_blank" style="color: white; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <a href="https://wa.me/9779840564096" target="_blank" style="color: var(--text-color); text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <span style="font-weight: 600; font-size: 1.2rem;">WhatsApp</span>
                         <span style="font-size: 0.9rem; opacity: 0.8;">+977 984-0564096</span>
                     </a>
                 </div>
                 <div class="footer-contact-item">
-                    <a href="https://np.linkedin.com/in/subash-gongwa-165153351" target="_blank" style="color: white; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <a href="https://np.linkedin.com/in/subash-gongwa-165153351" target="_blank" style="color: var(--text-color); text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                         <span style="font-weight: 600; font-size: 1.2rem;">LinkedIn</span>
                         <span style="font-size: 0.9rem; opacity: 0.8;">Connect with me</span>
                     </a>
                 </div>
                 <div class="footer-contact-item">
-                    <div style="color: white; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                    <div style="color: var(--text-color); display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
                         <span style="font-weight: 600; font-size: 1.2rem;">Resume</span>
                         <div style="display: flex; gap: 1rem; font-size: 0.9rem;">
                             <a href="{% static 'subash gongwa (1) (1) (1).pdf' %}" target="_blank" style="color: #ffd700; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#ffed4e'" onmouseout="this.style.color='#ffd700'">Preview</a>
@@ -150,9 +178,57 @@
         </style>
     </footer>
     
+    <script>
+        // Theme toggle functionality for services page
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Change logo based on theme
+            const logo = document.querySelector('.logo');
+            if (logo) {
+                if (newTheme === 'light') {
+                    logo.src = "{% static 'pictures/LOGOLIGHT.png' %}";
+                } else {
+                    logo.src = "{% static 'pictures/logo.png' %}";
+                }
+            }
+            
+            console.log('Theme changed to:', newTheme);
+        }
+        
+        // Initialize theme immediately
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // Set initial logo based on saved theme
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            if (savedTheme === 'light') {
+                logo.src = "{% static 'pictures/LOGOLIGHT.png' %}";
+            } else {
+                logo.src = "{% static 'pictures/logo.png' %}";
+            }
+        }
+        
+        // Set up toggle button when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.querySelector('.theme-toggle');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', toggleTheme);
+                console.log('Toggle button connected');
+            } else {
+                console.log('Toggle button not found');
+            }
+        });
+    </script>
     <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+    <script src="{% static 'theme.js' %}"></script>
     <script src="{% static 'order-modal.js' %}"></script>
     <script src="{% static 'order-form.js' %}"></script>
     <script src="{% static 'theme-toggle.js' %}"></script>
+    <script src="{% static 'script.js' %}"></script>
 </body>
 </html>
