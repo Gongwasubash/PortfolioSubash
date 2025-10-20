@@ -391,31 +391,23 @@
                     input.style.setProperty('color', '#000000', 'important');
                     input.style.setProperty('border', '2px solid #000000', 'important');
                 });
-                
-                // Change images for light mode
-                const heroImg = document.querySelector('.hero-profile-image img');
-                const aboutImg = document.querySelector('#about img');
-                const contactImg = document.querySelector('#contact img');
-                
+            }
+            
+            // Change images based on theme
+            const heroImg = document.querySelector('.hero-profile-image img');
+            const aboutImg = document.querySelector('#about img');
+            const contactImg = document.querySelector('#contact img');
+            const logo = document.querySelector('.logo');
+            
+            if (theme === 'light') {
                 if (heroImg) heroImg.src = "{% static 'pictures/44light.png' %}";
                 if (aboutImg) aboutImg.src = "{% static 'pictures/555light.png' %}";
                 if (contactImg) contactImg.src = "{% static 'pictures/566light.png' %}";
-                
-                // Change logo for light mode
-                const logo = document.querySelector('.logo');
                 if (logo) logo.src = "{% static 'pictures/LOGOLIGHT.png' %}";
             } else {
-                // Revert to original images for dark mode
-                const heroImg = document.querySelector('.hero-profile-image img');
-                const aboutImg = document.querySelector('#about img');
-                const contactImg = document.querySelector('#contact img');
-                
                 if (heroImg) heroImg.src = "{% static 'pictures/44.png' %}";
                 if (aboutImg) aboutImg.src = "{% static 'pictures/555.png' %}";
                 if (contactImg) contactImg.src = "{% static 'pictures/566.png' %}";
-                
-                // Revert logo for dark mode
-                const logo = document.querySelector('.logo');
                 if (logo) logo.src = "{% static 'pictures/logo.png' %}";
             }
             
@@ -434,18 +426,16 @@
             }
         }
         
-        // Run on page load and theme change
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             fixFormInputs();
-            setTimeout(fixFormInputs, 500);
         });
         
-        // Override theme toggle to fix inputs
+        // Override theme toggle
         const originalToggle = window.toggleTheme || function() {};
         window.toggleTheme = function() {
             originalToggle();
-            setTimeout(fixFormInputs, 200);
-            setTimeout(fixFormInputs, 500);
+            setTimeout(fixFormInputs, 100);
         };
     </script>
     

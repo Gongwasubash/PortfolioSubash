@@ -14,7 +14,7 @@ ALLOWED_HOSTS = ["*"]
 
 # CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
-    "https://web-production-b5cc.up.railway.app",
+    "https://*.onrender.com",
     "http://127.0.0.1:8000",
     "http://localhost:8000",
 ]
