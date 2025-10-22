@@ -1,0 +1,78 @@
+/* Voice Agent Styles */
+.voice-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.voice-btn, .speaker-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.voice-btn:hover, .speaker-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.voice-btn.listening {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.speaker-btn.speaking {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Voice indicator in chat messages */
+.voice-indicator {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    background: #10b981;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    animation: voicePulse 2s infinite;
+}
+
+@keyframes voicePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+}
+
+/* Responsive voice controls */
+@media (max-width: 480px) {
+    .voice-controls {
+        gap: 0.3rem;
+    }
+    
+    .voice-btn, .speaker-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
