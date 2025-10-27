@@ -1,16 +1,18 @@
 from pathlib import Path
 import dj_database_url
+import os
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Secret Key (production मा सुरक्षित राख्नुपर्छ)
-SECRET_KEY = "your_secret_key_here"
+# Secret Key
+SECRET_KEY = config('SECRET_KEY', default='your_secret_key_here')
 
 # Debug
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Allowed Hosts
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*', '.vercel.app', 'localhost', '127.0.0.1']
 
 # CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
@@ -85,11 +87,11 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR.parent / "staticfiles_build" / "static"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    BASE_DIR.parent / "static",  # Parent directory static folder
-    BASE_DIR.parent / "pictures",  # Pictures directory
+    BASE_DIR.parent / "static",
+    BASE_DIR.parent / "pictures",
 ]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
