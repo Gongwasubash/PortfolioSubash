@@ -142,6 +142,64 @@ def create_order(request):
                 khalti_token=data.get('khalti_token', '')
             )
             
+            # Send confirmation email to customer
+            customer_subject = f"Order Confirmation - {order.service_name}"
+            customer_message = f"""
+Dear {order.name},
+
+Thank you for your order! We have received your request.
+
+Order Details:
+- Service: {order.service_name}
+- Price: {order.price}
+- Status: {order.payment_status.title()}
+
+Project Details:
+{order.project_details}
+
+We will contact you soon to discuss your project requirements.
+
+Best regards,
+Subash Gongwa
+Graphic Designer
+Email: subashgongwanepal@gmail.com
+Phone: +977 984-0564096
+            """
+            
+            send_mail(
+                customer_subject,
+                customer_message,
+                'subashgongwanepal@gmail.com',
+                [order.email],
+                fail_silently=True,
+            )
+            
+            # Send notification to admin
+            admin_subject = f"New Order Received - {order.service_name}"
+            admin_message = f"""
+New order received!
+
+Order Details:
+- Customer: {order.name} ({order.email})
+- Phone: {order.phone}
+- Service: {order.service_name}
+- Price: {order.price}
+- Payment Status: {order.payment_status.title()}
+
+Project Details:
+{order.project_details}
+
+Created at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+            """
+            
+            send_mail(
+                admin_subject,
+                admin_message,
+                'subashgongwanepal@gmail.com',
+                ['subashgongwanepal@gmail.com'],
+                fail_silently=True,
+            )
+            
             return JsonResponse({'status': 'success', 'order_id': order.id})
             
         except Exception as e:

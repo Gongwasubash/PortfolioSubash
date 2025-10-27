@@ -6,6 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Media - Portfolio</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        .pinterest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 0 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .pinterest-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .pinterest-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .pinterest-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .pinterest-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1rem 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .pinterest-item:hover .pinterest-overlay {
+            opacity: 1;
+        }
+        
+        .download-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .pinterest-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .pinterest-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Image Preview Modal -->
@@ -33,23 +104,221 @@
             <h2>Social Media Posts</h2>
             <p>Engaging social media designs and promotional content</p>
             <div class="pinterest-grid" style="margin-top: 2rem;">
-                {% for design in social_media_designs %}
-                <div class="pinterest-item" onclick="openModal('{{ design.image.url }}')">
-                    <img src="{{ design.image.url }}" alt="{{ design.title }}">
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/3.png' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/3.png' %}" alt="Brand Design 3">
                     <div class="pinterest-overlay">
-                        <h3>{{ design.title }}</h3>
-                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{{ design.image.url }}', '{{ design.title }}.jpg')">Download</button>
+                        <h3>Brand Design 3</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/3.png' %}', 'brand-design-3.png')">Download</button>
                     </div>
                 </div>
-                {% empty %}
-                <div class="pinterest-item" onclick="openModal('{% static 'pictures/post/CG.jpg' %}')">
-                    <img src="{% static 'pictures/post/CG.jpg' %}" alt="CG Design">
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/4.png' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/4.png' %}" alt="Brand Design 4">
+                    <div class="pinterest-overlay">
+                        <h3>Brand Design 4</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/4.png' %}', 'brand-design-4.png')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/5.png' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/5.png' %}" alt="Brand Design 5">
+                    <div class="pinterest-overlay">
+                        <h3>Brand Design 5</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/5.png' %}', 'brand-design-5.png')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/cg 2.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/cg 2.jpg' %}" alt="CG Design 2">
+                    <div class="pinterest-overlay">
+                        <h3>CG Design 2</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/cg 2.jpg' %}', 'cg-design-2.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/CG.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/CG.jpg' %}" alt="CG Design">
                     <div class="pinterest-overlay">
                         <h3>CG Design</h3>
-                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/post/CG.jpg' %}', 'CG-Design.jpg')">Download</button>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/CG.jpg' %}', 'cg-design.jpg')">Download</button>
                     </div>
                 </div>
-                {% endfor %}
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/CHOCOFUN 1.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/CHOCOFUN 1.jpg' %}" alt="Chocofun 1">
+                    <div class="pinterest-overlay">
+                        <h3>Chocofun 1</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/CHOCOFUN 1.jpg' %}', 'chocofun-1.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/CHOCOFUN 2.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/CHOCOFUN 2.jpg' %}" alt="Chocofun 2">
+                    <div class="pinterest-overlay">
+                        <h3>Chocofun 2</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/CHOCOFUN 2.jpg' %}', 'chocofun-2.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/himal print solution  ghode jatra copy.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/himal print solution  ghode jatra copy.jpg' %}" alt="Himal Print Solution">
+                    <div class="pinterest-overlay">
+                        <h3>Himal Print Solution</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/himal print solution  ghode jatra copy.jpg' %}', 'himal-print-solution.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/ice cream.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/ice cream.jpg' %}" alt="Ice Cream">
+                    <div class="pinterest-overlay">
+                        <h3>Ice Cream</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/ice cream.jpg' %}', 'ice-cream.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/IMG-20250306-WA0000.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/IMG-20250306-WA0000.jpg' %}" alt="Brand Image">
+                    <div class="pinterest-overlay">
+                        <h3>Brand Image</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/IMG-20250306-WA0000.jpg' %}', 'brand-image.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/janai purnima.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/janai purnima.jpg' %}" alt="Janai Purnima">
+                    <div class="pinterest-overlay">
+                        <h3>Janai Purnima</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/janai purnima.jpg' %}', 'janai-purnima.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/janmastami.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/janmastami.jpg' %}" alt="Janmastami">
+                    <div class="pinterest-overlay">
+                        <h3>Janmastami</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/janmastami.jpg' %}', 'janmastami.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/ktm.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/ktm.jpg' %}" alt="KTM">
+                    <div class="pinterest-overlay">
+                        <h3>KTM</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/ktm.jpg' %}', 'ktm.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/ktm2.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/ktm2.jpg' %}" alt="KTM 2">
+                    <div class="pinterest-overlay">
+                        <h3>KTM 2</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/ktm2.jpg' %}', 'ktm2.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/kukur-tihar.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/kukur-tihar.jpg' %}" alt="Kukur Tihar">
+                    <div class="pinterest-overlay">
+                        <h3>Kukur Tihar</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/kukur-tihar.jpg' %}', 'kukur-tihar.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/laxmi puja ko subhakamana.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/laxmi puja ko subhakamana.jpg' %}" alt="Laxmi Puja">
+                    <div class="pinterest-overlay">
+                        <h3>Laxmi Puja</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/laxmi puja ko subhakamana.jpg' %}', 'laxmi-puja.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/mahashivaratri.png' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/mahashivaratri.png' %}" alt="Mahashivaratri">
+                    <div class="pinterest-overlay">
+                        <h3>Mahashivaratri</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/mahashivaratri.png' %}', 'mahashivaratri.png')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/namaste classic.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/namaste classic.jpg' %}" alt="Namaste Classic">
+                    <div class="pinterest-overlay">
+                        <h3>Namaste Classic</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/namaste classic.jpg' %}', 'namaste-classic.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/pathao.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/pathao.jpg' %}" alt="Pathao">
+                    <div class="pinterest-overlay">
+                        <h3>Pathao</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/pathao.jpg' %}', 'pathao.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/raxya bandhan.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/raxya bandhan.jpg' %}" alt="Raxya Bandhan">
+                    <div class="pinterest-overlay">
+                        <h3>Raxya Bandhan</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/raxya bandhan.jpg' %}', 'raxya-bandhan.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/social media.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/social media.jpg' %}" alt="Social Media">
+                    <div class="pinterest-overlay">
+                        <h3>Social Media</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/social media.jpg' %}', 'social-media.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/teej himalyan print.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/teej himalyan print.jpg' %}" alt="Teej Himalyan Print">
+                    <div class="pinterest-overlay">
+                        <h3>Teej Himalyan Print</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/teej himalyan print.jpg' %}', 'teej-himalyan-print.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/teej ko subhakamana.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/teej ko subhakamana.jpg' %}" alt="Teej Ko Subhakamana">
+                    <div class="pinterest-overlay">
+                        <h3>Teej Ko Subhakamana</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/teej ko subhakamana.jpg' %}', 'teej-ko-subhakamana.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/thakali 1.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/thakali 1.jpg' %}" alt="Thakali 1">
+                    <div class="pinterest-overlay">
+                        <h3>Thakali 1</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/thakali 1.jpg' %}', 'thakali-1.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/thakali.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/thakali.jpg' %}" alt="Thakali">
+                    <div class="pinterest-overlay">
+                        <h3>Thakali</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/thakali.jpg' %}', 'thakali.jpg')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/Untitled-1-Recovered.png' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/Untitled-1-Recovered.png' %}" alt="Untitled Design 1">
+                    <div class="pinterest-overlay">
+                        <h3>Untitled Design 1</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/Untitled-1-Recovered.png' %}', 'untitled-design-1.png')">Download</button>
+                    </div>
+                </div>
+                
+                <div class="pinterest-item" onclick="openModal('{% static 'pictures/socialmedia/brand/Untitled-2.jpg' %}')">
+                    <img src="{% static 'pictures/socialmedia/brand/Untitled-2.jpg' %}" alt="Untitled Design 2">
+                    <div class="pinterest-overlay">
+                        <h3>Untitled Design 2</h3>
+                        <button class="download-btn" onclick="event.stopPropagation(); downloadImage('{% static 'pictures/socialmedia/brand/Untitled-2.jpg' %}', 'untitled-design-2.jpg')">Download</button>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -110,8 +379,65 @@
         </style>
     </footer>
     
-    <script src="{% static 'download.js' %}"></script>
-    <script src="{% static 'preview.js' %}"></script>
+    <script>
+        let currentImageIndex = 0;
+        const images = [
+            '{% static "pictures/socialmedia/brand/3.png" %}',
+            '{% static "pictures/socialmedia/brand/4.png" %}',
+            '{% static "pictures/socialmedia/brand/5.png" %}',
+            '{% static "pictures/socialmedia/brand/cg 2.jpg" %}',
+            '{% static "pictures/socialmedia/brand/CG.jpg" %}',
+            '{% static "pictures/socialmedia/brand/CHOCOFUN 1.jpg" %}',
+            '{% static "pictures/socialmedia/brand/CHOCOFUN 2.jpg" %}',
+            '{% static "pictures/socialmedia/brand/himal print solution  ghode jatra copy.jpg" %}',
+            '{% static "pictures/socialmedia/brand/ice cream.jpg" %}',
+            '{% static "pictures/socialmedia/brand/IMG-20250306-WA0000.jpg" %}',
+            '{% static "pictures/socialmedia/brand/janai purnima.jpg" %}',
+            '{% static "pictures/socialmedia/brand/janmastami.jpg" %}',
+            '{% static "pictures/socialmedia/brand/ktm.jpg" %}',
+            '{% static "pictures/socialmedia/brand/ktm2.jpg" %}',
+            '{% static "pictures/socialmedia/brand/kukur-tihar.jpg" %}',
+            '{% static "pictures/socialmedia/brand/laxmi puja ko subhakamana.jpg" %}',
+            '{% static "pictures/socialmedia/brand/mahashivaratri.png" %}',
+            '{% static "pictures/socialmedia/brand/namaste classic.jpg" %}',
+            '{% static "pictures/socialmedia/brand/pathao.jpg" %}',
+            '{% static "pictures/socialmedia/brand/raxya bandhan.jpg" %}',
+            '{% static "pictures/socialmedia/brand/social media.jpg" %}',
+            '{% static "pictures/socialmedia/brand/teej himalyan print.jpg" %}',
+            '{% static "pictures/socialmedia/brand/teej ko subhakamana.jpg" %}',
+            '{% static "pictures/socialmedia/brand/thakali 1.jpg" %}',
+            '{% static "pictures/socialmedia/brand/thakali.jpg" %}',
+            '{% static "pictures/socialmedia/brand/Untitled-1-Recovered.png" %}',
+            '{% static "pictures/socialmedia/brand/Untitled-2.jpg" %}'
+        ];
+
+        function openModal(imageSrc) {
+            document.getElementById('imageModal').style.display = 'block';
+            document.getElementById('modalImage').src = imageSrc;
+            currentImageIndex = images.indexOf(imageSrc);
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            document.getElementById('modalImage').src = images[currentImageIndex];
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            document.getElementById('modalImage').src = images[currentImageIndex];
+        }
+
+        function downloadImage(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.click();
+        }
+    </script>
     <script src="{% static 'theme-toggle.js' %}"></script>
 </body>
 </html>

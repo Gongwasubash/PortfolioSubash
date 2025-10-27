@@ -9,6 +9,8 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         message: formData.get('message')
     };
     
+    console.log('Sending contact form data:', data);
+    
     fetch('/api/contact/', {
         method: 'POST',
         headers: {
@@ -17,18 +19,22 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Response status:', response.status);
+        return response.json();
+    })
     .then(data => {
+        console.log('Response data:', data);
         if (data.status === 'success') {
-            alert('Message sent successfully!');
+            alert('Message sent successfully! Thank you for contacting us.');
             this.reset();
         } else {
-            alert('Error sending message. Please try again.');
+            alert('Error: ' + (data.message || 'Please try again.'));
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Error sending message. Please try again.');
+        console.error('Fetch error:', error);
+        alert('Network error. Please check your connection and try again.');
     });
 });
 

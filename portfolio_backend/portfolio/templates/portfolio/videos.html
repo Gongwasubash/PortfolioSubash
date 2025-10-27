@@ -10,6 +10,113 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'hover-volume.css' %}">
+    <style>
+        .video-pinterest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 0 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .video-pinterest-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .video-pinterest-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .video-pinterest-item video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-pinterest-item:hover .video-overlay {
+            opacity: 1;
+        }
+        
+        .volume-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .video-title {
+            padding: 1rem;
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: bold;
+            line-height: 1.3;
+            text-align: center;
+            background: var(--card-bg);
+        }
+        
+        @media (max-width: 768px) {
+            .video-pinterest-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+            
+            .video-pinterest-item video {
+                height: 200px;
+            }
+            
+            .video-title {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .video-pinterest-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .video-pinterest-item video {
+                height: 180px;
+            }
+            
+            .video-title {
+                padding: 0.6rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Reels Modal -->
@@ -39,112 +146,175 @@
             <h2>Video Projects</h2>
             <p>Creative video content and motion graphics showcase</p>
             <div class="video-pinterest-grid" style="margin-top: 2rem;">
-                {% for video in videos %}
-                <div class="video-pinterest-item" onclick="openReels({{ forloop.counter0 }})" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)" style="margin-bottom: 1rem;">
+                <div class="video-pinterest-item" onclick="openReels(0)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
                     <video muted preload="metadata" playsinline>
-                        <source src="{{ video.video_file.url }}" type="video/mp4">
+                        <source src="{% static 'video cover/Video/Video/Ai.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
-                    <div class="video-title" style="padding: 0.5rem 0; color: var(--text-color); font-size: 0.9rem; font-weight: bold; line-height: 1.3; cursor: pointer;">
-                        {{ video.title }}
-                    </div>
+                    <div class="video-title">AI Video</div>
                 </div>
-                {% empty %}
-                <div class="video-pinterest-item" onclick="openReels(0)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)" style="margin-bottom: 1rem;">
-                    <video muted preload="metadata" playsinline>
-                        <source src="{% static 'vid/1475273_People_Family_1280x720.mp4' %}" type="video/mp4">
-                    </video>
-                    <div class="video-overlay">
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
-                    </div>
-                    <div class="video-title" style="padding: 0.5rem 0; color: var(--text-color); font-size: 0.9rem; font-weight: bold; line-height: 1.3; cursor: pointer;">
-                        People Family
-                    </div>
-                </div>
+                
                 <div class="video-pinterest-item" onclick="openReels(1)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
-                    <video muted>
-                        <source src="{% static 'vid/20435505-hd_1366_636_30fps (1).mp4' %}" type="video/mp4">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/AQMQjU0HKbjFu2GHGT7IE51_G1a1is30ANEpjMRgkD90jkh9OJLDIWHUEPDXN_fv3tZBU48HxV9JEmK_bKbgeeQ6.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <h3>HD Video</h3>
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
+                    <div class="video-title">Creative Video 1</div>
                 </div>
+                
                 <div class="video-pinterest-item" onclick="openReels(2)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
-                    <video muted>
-                        <source src="{% static 'vid/457528_Drone_Mountains_Drone_1280x720.mp4' %}" type="video/mp4">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/AQMwH-StJkFes8aVhR8yJvegq2EGVsRcRnuewQODp9UD9rjB-oqaTlnViFEErGOBTQujmznvWJjyK_Q2ZVmtxx39.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <h3>Drone Mountains</h3>
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
+                    <div class="video-title">Creative Video 2</div>
                 </div>
+                
                 <div class="video-pinterest-item" onclick="openReels(3)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
-                    <video muted>
-                        <source src="{% static 'vid/595868_Drone_Landscape_Nature_1280x720.mp4' %}" type="video/mp4">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/AQNrMRmSNa2w_cVB1dzg-o6zbjNu8n5SxJwTo5PsQCSj4KMFgxgzGBXnMKsltexWhhILaR_1LPzs3701J3bvyvrd.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <h3>Drone Landscape</h3>
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
+                    <div class="video-title">Creative Video 3</div>
                 </div>
+                
                 <div class="video-pinterest-item" onclick="openReels(4)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
-                    <video muted>
-                        <source src="{% static 'vid/6010598_Woman_People_1280x720.mp4' %}" type="video/mp4">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/AQO4ZqoW6mAamEDEE6D1uoNktI2_gk7_Osdm7p2tDQDPSCvw_1VOBzX0jbDr85AWGNlhPFXFXFOXyaQZQ4Ai0xlV.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <h3>Woman People</h3>
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
+                    <div class="video-title">Creative Video 4</div>
                 </div>
+                
                 <div class="video-pinterest-item" onclick="openReels(5)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
-                    <video muted>
-                        <source src="{% static 'vid/6010653_Woman_People_1280x720.mp4' %}" type="video/mp4">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/AQP1ExgOw2d7qLBV0jcGiwjzxicmc9b5Loz69PrOK8KMUzBl_P9oBfOuitMpQk_UoO4ntlj4x34DL1Ko8XVJKysr.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <h3>Woman Portrait</h3>
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
+                    <div class="video-title">Creative Video 5</div>
                 </div>
+                
                 <div class="video-pinterest-item" onclick="openReels(6)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
-                    <video muted>
-                        <source src="{% static 'vid/6254390_Person_People_1280x720.mp4' %}" type="video/mp4">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/AQP1poBS7mEYrYu9n1GdPbS-ZCeeDdg4AE2S9wMPR62f6MGF1N_iWYUFHNhgYLwCRY8evTfVY7q5-eK6S9DaCkm3.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <h3>Person People</h3>
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
+                    <div class="video-title">Creative Video 6</div>
                 </div>
+                
                 <div class="video-pinterest-item" onclick="openReels(7)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
-                    <video muted>
-                        <source src="{% static 'vid/6356447_Foggy_Mountain_Foogy_1280x720.mp4' %}" type="video/mp4">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/AQPFLWEppX4p01Z5_fr0WnOBzy_pnWztyUt73uQ7DlIX1D4ATsnKeEaio4a54aTKkefcy_-voRdsnN9qtcgI_u3l.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <h3>Foggy Mountain</h3>
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
+                    <div class="video-title">Creative Video 7</div>
                 </div>
+                
                 <div class="video-pinterest-item" onclick="openReels(8)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
-                    <video muted>
-                        <source src="{% static 'vid/small-vecteezy_boudhanath-pagoda-in-kathmandu-nepal_2021513_small.mp4' %}" type="video/mp4">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/AQPl80Lu9aOG-tHZo3aLAKBjmOMwhInQNdKz6yt9TY6EUYELd3O-kCk3byrDxg2vArPbzPe4gN8qn2t0ylx5qVUe.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <h3>Boudhanath Pagoda</h3>
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
+                    <div class="video-title">Creative Video 8</div>
                 </div>
+                
                 <div class="video-pinterest-item" onclick="openReels(9)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
-                    <video muted>
-                        <source src="{% static 'vid/small-vecteezy_drone-flight-over-majestic-snow-capped-mountains-peeking_57059038_small.mp4' %}" type="video/mp4">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/Comp 1.mp4' %}" type="video/mp4">
                     </video>
                     <div class="video-overlay">
-                        <h3>Mountain Flight</h3>
-                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; cursor: pointer;">🔇</button>
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
                     </div>
+                    <div class="video-title">Composition 1</div>
                 </div>
-                {% endfor %}
+                
+                <div class="video-pinterest-item" onclick="openReels(10)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/Comp 12.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
+                    </div>
+                    <div class="video-title">Composition 12</div>
+                </div>
+                
+                <div class="video-pinterest-item" onclick="openReels(11)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/fast food.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
+                    </div>
+                    <div class="video-title">Fast Food</div>
+                </div>
+                
+                <div class="video-pinterest-item" onclick="openReels(12)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/oats.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
+                    </div>
+                    <div class="video-title">Oats</div>
+                </div>
+                
+                <div class="video-pinterest-item" onclick="openReels(13)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/VID-20250716-WA0000.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
+                    </div>
+                    <div class="video-title">Video Project 1</div>
+                </div>
+                
+                <div class="video-pinterest-item" onclick="openReels(14)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/VID-20250717-WA0000.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
+                    </div>
+                    <div class="video-title">Video Project 2</div>
+                </div>
+                
+                <div class="video-pinterest-item" onclick="openReels(15)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/VID-20250722-WA0004.mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
+                    </div>
+                    <div class="video-title">Video Project 3</div>
+                </div>
+                
+                <div class="video-pinterest-item" onclick="openReels(16)" onmouseenter="hoverPlay(this)" onmouseleave="hoverPause(this)">
+                    <video muted preload="metadata" playsinline>
+                        <source src="{% static 'video cover/Video/Video/VID-20250815-WA0002(1).mp4' %}" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <button onclick="event.stopPropagation(); toggleThumbnailMute(this)" class="volume-btn">🔇</button>
+                    </div>
+                    <div class="video-title">Video Project 4</div>
+                </div>
             </div>
         </section>
     </main>
@@ -206,15 +376,24 @@
     </footer>
     
     <script>
-        // Pass video data from Django to JavaScript
         const videos = [
-            {% for video in videos %}
-            { src: '{{ video.video_file.url }}', title: '{{ video.title }}' }{% if not forloop.last %},{% endif %}
-            {% empty %}
-            { src: '/static/vid/1475273_People_Family_1280x720.mp4', title: 'People Family' },
-            { src: '/static/vid/20435505-hd_1366_636_30fps (1).mp4', title: 'HD Video' },
-            { src: '/static/vid/457528_Drone_Mountains_Drone_1280x720.mp4', title: 'Drone Mountains' }
-            {% endfor %}
+            { src: '/static/video cover/Video/Video/Ai.mp4', title: 'AI Video' },
+            { src: '/static/video cover/Video/Video/AQMQjU0HKbjFu2GHGT7IE51_G1a1is30ANEpjMRgkD90jkh9OJLDIWHUEPDXN_fv3tZBU48HxV9JEmK_bKbgeeQ6.mp4', title: 'Creative Video 1' },
+            { src: '/static/video cover/Video/Video/AQMwH-StJkFes8aVhR8yJvegq2EGVsRcRnuewQODp9UD9rjB-oqaTlnViFEErGOBTQujmznvWJjyK_Q2ZVmtxx39.mp4', title: 'Creative Video 2' },
+            { src: '/static/video cover/Video/Video/AQNrMRmSNa2w_cVB1dzg-o6zbjNu8n5SxJwTo5PsQCSj4KMFgxgzGBXnMKsltexWhhILaR_1LPzs3701J3bvyvrd.mp4', title: 'Creative Video 3' },
+            { src: '/static/video cover/Video/Video/AQO4ZqoW6mAamEDEE6D1uoNktI2_gk7_Osdm7p2tDQDPSCvw_1VOBzX0jbDr85AWGNlhPFXFXFOXyaQZQ4Ai0xlV.mp4', title: 'Creative Video 4' },
+            { src: '/static/video cover/Video/Video/AQP1ExgOw2d7qLBV0jcGiwjzxicmc9b5Loz69PrOK8KMUzBl_P9oBfOuitMpQk_UoO4ntlj4x34DL1Ko8XVJKysr.mp4', title: 'Creative Video 5' },
+            { src: '/static/video cover/Video/Video/AQP1poBS7mEYrYu9n1GdPbS-ZCeeDdg4AE2S9wMPR62f6MGF1N_iWYUFHNhgYLwCRY8evTfVY7q5-eK6S9DaCkm3.mp4', title: 'Creative Video 6' },
+            { src: '/static/video cover/Video/Video/AQPFLWEppX4p01Z5_fr0WnOBzy_pnWztyUt73uQ7DlIX1D4ATsnKeEaio4a54aTKkefcy_-voRdsnN9qtcgI_u3l.mp4', title: 'Creative Video 7' },
+            { src: '/static/video cover/Video/Video/AQPl80Lu9aOG-tHZo3aLAKBjmOMwhInQNdKz6yt9TY6EUYELd3O-kCk3byrDxg2vArPbzPe4gN8qn2t0ylx5qVUe.mp4', title: 'Creative Video 8' },
+            { src: '/static/video cover/Video/Video/Comp 1.mp4', title: 'Composition 1' },
+            { src: '/static/video cover/Video/Video/Comp 12.mp4', title: 'Composition 12' },
+            { src: '/static/video cover/Video/Video/fast food.mp4', title: 'Fast Food' },
+            { src: '/static/video cover/Video/Video/oats.mp4', title: 'Oats' },
+            { src: '/static/video cover/Video/Video/VID-20250716-WA0000.mp4', title: 'Video Project 1' },
+            { src: '/static/video cover/Video/Video/VID-20250717-WA0000.mp4', title: 'Video Project 2' },
+            { src: '/static/video cover/Video/Video/VID-20250722-WA0004.mp4', title: 'Video Project 3' },
+            { src: '/static/video cover/Video/Video/VID-20250815-WA0002(1).mp4', title: 'Video Project 4' }
         ];
     </script>
     <script src="{% static 'reels.js' %}"></script>
